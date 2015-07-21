@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130902175349) do
+ActiveRecord::Schema.define(version: 20150720133530) do
 
   create_table 'oauth_access_grants', force: true do |t|
     t.integer  'resource_owner_id',                 null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20130902175349) do
     t.datetime 'updated_at',                   null: false
     t.integer  'owner_id'
     t.string   'owner_type'
+    t.string   'scopes',                       :default => '', :null => false
   end
 
   add_index 'oauth_applications', %w(owner_id owner_type), name: 'index_oauth_applications_on_owner_id_and_owner_type'

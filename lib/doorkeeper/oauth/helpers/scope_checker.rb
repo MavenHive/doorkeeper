@@ -9,7 +9,7 @@ module Doorkeeper
 
         def self.valid?(scope, server_scopes, application_scopes = '')
           valid_scopes = if application_scopes.present?
-                           server_scopes & application_scopes
+                           application_scopes
                          else
                            server_scopes
                          end

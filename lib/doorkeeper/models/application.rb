@@ -1,6 +1,7 @@
 module Doorkeeper
   class Application
     include OAuth::Helpers
+    include Models::Scopes
 
     has_many :access_grants, dependent: :destroy, class_name: 'Doorkeeper::AccessGrant'
     has_many :access_tokens, dependent: :destroy, class_name: 'Doorkeeper::AccessToken'

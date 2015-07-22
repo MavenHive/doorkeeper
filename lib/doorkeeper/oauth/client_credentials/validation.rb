@@ -13,7 +13,7 @@ module Doorkeeper
         validate :scopes, error: :invalid_scope
 
         def initialize(server, request)
-          @server, @request = server, request
+          @server, @request, @client = server, request, request.client
           validate
         end
 
@@ -25,7 +25,14 @@ module Doorkeeper
 
         def validate_scopes
           return true unless @request.original_scopes.present?
-          ScopeChecker.valid?(@request.original_scopes, @server.scopes)
+
+          application_scopes = if @client.present?
+                                 @client.application.scopes
+                               else
+                                 ''
+                               end
+
+          ScopeChecker.valid?(@request.original_scopes, @server.scopes, application_scopes)
         end
       end
     end

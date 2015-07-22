@@ -2,6 +2,7 @@ module Doorkeeper
   class Application
     include Mongoid::Document
     include Mongoid::Timestamps
+    include Models::Mongoid::Scopes
 
     self.store_in collection: :oauth_applications
 
